@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './style.css'
 
 
@@ -9,6 +9,7 @@ const Signup = () => {
     const [error,setError] = useState(false)
     const [loading,setLoading] = useState(false)
 
+    const navigate = useNavigate()
 
     const handleChange =(e)=>{
 
@@ -48,6 +49,7 @@ const Signup = () => {
             return;
         }
 
+        navigate('/signin')
          
         } catch (error) {
             setLoading(false);
@@ -205,7 +207,7 @@ const Signup = () => {
             </div>
         </div>
     </div>
-</div>
+    </div>
 );
   
 }
