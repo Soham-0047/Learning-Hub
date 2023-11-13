@@ -1,14 +1,21 @@
 import {React,useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInFailure, signInSuccess, signInstart } from '../redux/user/userSlice.js';
+
 
 
 const Signin = () => {
 
   const [formData,setFormData] = useState({})
-  const [error,setError] = useState(false)
-  const [loading,setLoading] = useState(false)
+//   const [error,setError] = useState(false)
+//   const [loading,setLoading] = useState(false)
+
+const {loading,error} = useSelector((state) => state.user)
 
   const navigate = useNavigate()
+ const dispatch = useDispatch()
+
 
   const handleChange =(e)=>{
 
@@ -27,8 +34,12 @@ const Signin = () => {
         
       //* Instead of doing tghis http://localhost:5000/api/auth/signup we cas use proxy in vite-config section for production ready code
 
-      setLoading(true)
-      setError(false);
+    //   setLoading(true)
+    //   setError(false);
+
+    //! Instead of doing this we can use usedispatch
+        dispatch(signInstart())
+
       const res = await fetch('api/auth/signin',{
           
       method:'POST',
@@ -41,18 +52,20 @@ const Signin = () => {
       const data = await res.json();
 
        
-      setLoading(false);
+    //   setLoading(false);
+    
 
       if(data.success === false){
-          setError(true)
+          dispatch(signInFailure(data))
           return;
       }
-
+       dispatch(signInSuccess(data))
       navigate('/')
        
       } catch (error) {
-          setLoading(false);
-          setError(true)
+        //   setLoading(false);
+        //   setError(true)
+        dispatch(signInFailure(error))
       }
 
   }
@@ -136,7 +149,9 @@ const Signin = () => {
                        {loading ? 'Loading...':'Sign In'} 
                     </button>
                 </div>
-                <p className='text-center text-red-600 mt-4'>{error && 'Something Went Wrong'}</p>
+                <p className='text-center text-red-600 mt-4'>
+                    {error ? error.message || 'Something Went Wrong':""}
+                    </p>
             </form>
             <div className="mt-4 text-grey-600">
                 Dont have an account?{" "}
