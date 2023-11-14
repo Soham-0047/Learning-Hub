@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import {useSelector} from 'react-redux'
 
-const Navbar = ({fixed}) => {
-  const [navbarOpen,setNavbarOpen] = React.useState(false)
+
+const Navbar = () => {
+  const [navbarOpen,setNavbarOpen] = useState(false)
+
+  const {currentUser} = useSelector((state) => state.user);
+
+
   return (
     <>  
     <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-teal-500  w-100">
@@ -10,7 +16,7 @@ const Navbar = ({fixed}) => {
       <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
         <a
           className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
-          href="#pablo"
+          
         >
           Laerning Hub
         </a>
@@ -24,7 +30,7 @@ const Navbar = ({fixed}) => {
       </div>
       <div
         className={
-          "lg:flex flex-grow items-center" +
+          "lg:flex flex-grow items-center justify-center" +
           (navbarOpen ? " flex" : " hidden")
         }
         id="example-navbar-danger"
@@ -32,7 +38,7 @@ const Navbar = ({fixed}) => {
         <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
           <li className="nav-item">
             <Link to="/"
-              className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+              className="px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
               
             >
               {/* <ion-icon className="fab fa-facebook-square text-lg leading-lg text-white opacity-75" name="share"></ion-icon> */}
@@ -42,7 +48,7 @@ const Navbar = ({fixed}) => {
           </li>
           <li className="nav-item">
             <Link to="/about"
-              className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+              className="px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75"
               href="#pablo"
             >
               {/* <i className="fab fa-twitter text-lg leading-lg text-white opacity-75"></i> */}
@@ -51,13 +57,19 @@ const Navbar = ({fixed}) => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/signin"
-              className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-              href="#pablo"
-            >
+           <Link to="/profile">
               {/* <i className="fab fa-pinterest text-lg leading-lg text-white opacity-75"></i> */}
-              <span className="ml-2">Sign In</span>
-            </Link>
+
+              {currentUser ? (
+                  <img className=' w-8 h-8 rounded-full object-cover m-auto' src={currentUser.profilePicture} alt="profilepic"/>
+              ):
+              (
+                
+                <span className="ml-2 px-3 py-2 flex items-center text-s uppercase font-bold leading-snug text-white hover:opacity-75">Sign In</span>
+               
+              )}
+               </Link>
+            
           </li>
         </ul>
       </div>

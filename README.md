@@ -1,4 +1,4 @@
-# React + Vite
+# Learning Hub
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -11,6 +11,10 @@ Currently, two official plugins are available:
 - Complete the signup and signin page and connect with backend
 - More use the global state, here we will use redux toolkit.
 - For user session extended and reloading and user information keep we will use react persist
+
+#### Google OAuth 
+
+- Crate a separete google OAuth component for signin and signup and save the user information send to the backend
 
 ## Server Side
 
