@@ -20,7 +20,7 @@ Currently, two official plugins are available:
 
 ### Add Google OAuth 
 
--  Create firebase.js and ad additional configuration for google firebase OAuth
--  Get the data at the time of user signin with google OAuth and POST the data into backend.
+- Create firebase.js and ad additional configuration for google firebase OAuth
+- Get the data at the time of user signin with google OAuth and POST the data into backend.
 - Random hasehd password will generate and username with profile picture and save it to database
 

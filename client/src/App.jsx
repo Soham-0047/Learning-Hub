@@ -12,7 +12,7 @@ import PrivateRoute from './components/PrivateRoute'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     
